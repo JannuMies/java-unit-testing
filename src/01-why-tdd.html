@@ -6,17 +6,45 @@
 <body>
 <div>
  <a href ="index.html">Start</a>
- <a href ="02-katas.html">Katas</a>
+ <a href ="02-kiss.html">KISS</a>
 </div>
 
 <h1>Why TDD</h1>
 <p>
+Whenever people consider programming and writing unit tests separate things,
+I start yearning for a drink and a shoulder to cry against. If any
+non-trivial piece of code does not have a test, how can you say that
+it works? How can you safely change parts of it, if you see that your design
+will not work? How can you justify to yourself that
+<a href="http://programmer.97things.oreilly.com/wiki/index.php/Testing_Is_the_Engineering_Rigor_of_Software_Development">
+you have built something without validating it?</a>
+</p>
 
+<p>
+Testing a functionality can be done manually, but if I change some
+functionality in a module that is reachable by 17 paths, can accept
+4 parameters and has 3 possible exits, I check two of the 204 possible
+permutations and then start browsing the web. A good tester will
+check them all, but I wouldn't want to misuse the time of a
+good tester by forcing one to check 204 things more than once.
+Or Crom forbid, if I would need to add additional paths to the
+forementioned functionality. I'd be afraid to tell the testers,
+that I've just added another 12 things to their daily grind.
+</p>
+
+<p>
+When I have a repeatable validation procedure for my code, I can
+actually show what parts of my code work properly. This gives me
+the power to wantonly muck about the code and bend it wildly when
+I'm writing. I can think of only what I'm doing right now, without
+worrying if something I did 15 minutes ago will break. Because
+if something breaks, I will notice it the next time I run the tests,
+which in TDD happens constantly.
 </p>
 
 <div>
  <a href ="index.html">Start</a>
- <a href ="02-katas.html">Katas</a>
+ <a href ="02-kiss.html">KISS</a>
 </div>
 </body>
 </html>

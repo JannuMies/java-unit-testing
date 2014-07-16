@@ -1,0 +1,50 @@
+<html>
+<head>
+  <title>KISS</title>
+  <link rel="stylesheet" type="text/css" href="theme.css" />
+</head>
+<body>
+<div>
+ <a href ="01-why-tdd.html">Why TDD</a>
+ <a href ="index.html">Start</a>
+ <a href ="03-">??</a>
+</div>
+
+<h1>KISS</h1>
+<p>
+A couple of good programmers I know have desktop backgrounds that read
+"Keep it simple, stupid". It's a very good mantra, when writing code.
+My way of combining
+<a href="http://phraseologyproject.com/phrase/keep-it-simple-stupid">KISS</a>
+and
+<a href="http://blog.8thlight.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html">SRP</a>
+in writing unit tests has been to mock every dependancy, thereby cutting
+down the cumulative multiplexity of different layers. Consider the
+following:
+</p>
+<code>
+void updateTree(Tree treeToUpdate) {
+  if(gardenValidator.isValid(treeToUpdate) {
+    return garden.update(treeToUpdate);
+  } else {
+    throw new InvalidTreeException(treeToUpdate);
+  }
+}
+</code>
+
+<p>
+In this block, I am interested of only two things: A) If the tree is valid,
+it is passed to garden.update. B) If the tree is invalid, an exception is
+thrown. This means two tests. In this block the responsibility of validation
+is singled out, so I don't want to write different tests for all
+possible ways it can fail a validation, because that is the job for
+the tests testing GardenValidator.
+</p>
+
+<div>
+ <a href ="01-why-tdd.html">Why TDD</a>
+ <a href ="index.html">Start</a>
+ <a href ="03-">??</a>
+</div>
+</body>
+</html>

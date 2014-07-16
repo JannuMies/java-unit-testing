@@ -4,4 +4,13 @@ p {
 }
 li {
   font-size: 150%;
-]
+}
+code  {font-family: consolas, courier, monospace;
+       font-size: 150%;
+       white-space: pre; 
+       background-color: #ccf; /* any colour's okay, 
+       so long as it's different to the page-background  
+       (for ease of recognition) and contrast to the text */
+       color: #000; /* likewise the background-color comment */
+       }
+

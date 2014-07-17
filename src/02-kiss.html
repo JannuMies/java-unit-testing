@@ -20,12 +20,12 @@ and
 <a href="http://blog.8thlight.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html">SRP</a>
 in writing unit tests has been to mock every dependancy, thereby cutting
 down the cumulative multiplexity of different layers. Consider the
-following:
+following simple block of code:
 </p>
 <code>
 void updateTree(Tree treeToUpdate) {
   if(gardenValidator.isValid(treeToUpdate) {
-    return garden.update(treeToUpdate);
+    garden.update(treeToUpdate);
   } else {
     throw new InvalidTreeException(treeToUpdate);
   }
@@ -33,12 +33,26 @@ void updateTree(Tree treeToUpdate) {
 </code>
 
 <p>
-In this block, I am interested of only two things: A) If the tree is valid,
+In this block, I am interested of only two things: A) If treeToUpdate is valid,
 it is passed to garden.update. B) If the tree is invalid, an exception is
-thrown. This means two tests. In this block the responsibility of validation
-is singled out, so I don't want to write different tests for all
-possible ways it can fail a validation, because that is the job for
-the tests testing GardenValidator.
+thrown. This means two tests. Everything that GardenValidator does
+is left purposefully out, because it is irrelevant how many different ways
+the validation can fail, when the possible outcome is a boolean.
+</p>
+
+<p>
+By singleing out the responsibilities in the code to different, mockable
+classes, it doesn't matter if the tree validation can fail in 17 different
+ways. The updateTree-method still needs only two tests. And if 7 other
+methods also use the same validation class, you don't have to write
+7*17*X tests for every possible case the validation can fail in.
+</p>
+
+<p>
+This does have the downside, that you need to make sure, that GardenValidator
+is also tested. But the sweet thing about TDD is that when writing only
+the code needed to make the test pass, it's pretty easy to keep things
+simple. And simple stuff is also simple to test.
 </p>
 
 <div>

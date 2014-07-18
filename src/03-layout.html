@@ -1,0 +1,101 @@
+<html>
+<head>
+  <title>Layout</title>
+  <link rel="stylesheet" type="text/css" href="theme.css" />
+</head>
+<body>
+<div>
+ <a href ="02-kiss.html">KISS</a>
+ <a href ="index.html">Start</a>
+ <a href ="04-">??</a>
+</div>
+
+<h1>Layout</h1>
+<p>
+I try to follow a few basic guidelines, when writing tests.
+I set the tests up, so that they have a success case straight out of the box:
+</p>
+
+<code>
+// This is TreeServiceTest.java
+
+@Mock
+private GardenService gardenServiceMock;
+@Mock
+private GardenValidator gardenValidatorMock;
+
+private TreeService treeService
+private Tree tree;
+
+@BeforeMethod
+public void setup() {
+  MockitoAnnotations.initMocks(this);
+  tree = buildValidTree();
+
+  when(treeValidatorMock.isValid(any(Tree.class))).thenreturn(true);
+
+  treeService = new TreeService(gardenServiceMock, gardenValidatorMock);
+}
+</code>
+
+<p>
+I try Keep the tests themselves small and easily readable:
+</p>
+
+<code>
+// This is TreeServiceTest.java
+
+@Test
+public void testUpdatingValidTreePassesTreeToGardenService() {
+  treeService.updateTree(tree);
+
+  verify(gardenServiceMock).update(tree);
+}
+
+@Test(expected = InvalidTreeException.class)
+public void testUpdatingInvalidTreeFails() {
+  when(gardenValidatorMock.isValid(tree)).thenreturn(false);
+
+  treeService.updateTree(tree);
+}
+</code>
+
+<p>
+And I try to use whitespace to order them in up to three specific
+sections: setup, operation and verification. The first test skipped
+the setup-portion, because it was a success case and the second test
+had the verification written with annotations, so they are both bad
+examples for this rule. Normally, tests I write look something like
+this:
+</p>
+
+<code>
+@Test
+public void testMultipleTypesOfTreesCanBeUpdated() {
+  List<Tree> treeList = new ArrayList<Tree>();
+  Tree secondTree = tree.clone();
+  tree.setType(TreeType.BIRCH);
+  secondTree.setType(TreeType.LARCH);
+  treeList.add(tree);
+  treeList.add(secondTree);
+
+  treeService.updateTreeList(treelist);
+
+  verify(gardenService).updateAll(treeList);
+}
+</code>
+
+<p>
+6 lines of test specific setup, one operation line and finally,
+one verification line. The goal is to write tests so that when business
+rule changes necessitate a code change, you can easily alter the
+tests that need changing.
+</p>
+
+<div>
+ <a href ="02-kiss.html">KISS</a>
+ <a href ="index.html">Start</a>
+ <a href ="04-">??</a>
+</div>
+</body>
+</html>

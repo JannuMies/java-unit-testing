@@ -1,23 +1,73 @@
 <html>
 <head>
-  <title></title>
+  <title>Tools</title>
   <link rel="stylesheet" type="text/css" href="theme.css" />
 </head>
 <body>
 <div>
- <a href =""></a>
+ <a href ="04-hundred-percent-coverage.html">100% coverage</a>
  <a href ="index.html">Start</a>
- <a href =""></a>
 </div>
 
-<h1></h1>
+<h1>Tools</h1>
 <p>
+For code, I use Eclipse with the <a href="http://moreunit.sourceforge.net/">
+MoreUnit</a>-plugin, because you it allows me to switch between the
+test-file and the code-file with a single keyboard shortcut.
+</p>
+
+<p>
+For mocks, I try to push for <a href="https://code.google.com/p/mockito/">
+Mockito</a> if I have the choice. I find it has a more intuitive syntax than
+<a href="http://jmock.org/">JMock</a> and the matchers are clearer.
+</p>
+
+<p>
+Between <a href="http://testng.org/doc/index.html">TestNG</a> and
+<a href="http://junit.org/">JUnit</a> I might drift towards TestNG, but
+since some of the frameworks I have used did not support both of them,
+I've found out that it helps being ambivalent with them. Their differences
+are quite insignificant.
+</p>
+
+<p>
+The lowest layer of your software will most likely talk to a database
+and even though I like to try and test classes against only their
+functionality, it is not really sensible with the layer directly above
+the database. Therefore in-memory databases like
+<a href="http://hsqldb.org/">HyperSQL Database</a> are a good way
+to get a disposable database that you can use to write tests without
+a specific execution order. I think that this improves tests and code
+because it makes an incompatible schema trigger a test warning, it
+helps to define and limit the responsibility of the DB-layer, and
+it's quite fast.
+</p>
+
+<p>
+With an in-memory database for tests, it is necessary to keep the
+DB-schema in a format that can be automatically loaded. So 
+DB-alterations should be done via something like
+<a href="http://www.liquibase.org/">LiquiBase</a>.
+</p>
+
+<p>
+This might sound like it's drifting towards DevOps-land, but
+the beauty of it is, that things like incorporating a DB-management
+tool and an in-memory database are operations that should not be
+necessary to repeat. Once they are a properly implemented part of your
+project, they keep the cost of writing and running your tests low.
+You can of course use a normal database and write DB scripts to clean up
+what you've done in your tests, but that is a frustrating path. Every
+missed cleanup step that does not break your build, because the tests
+ran in the order 1 3 2 5 4, but breaks the CI build because it runs them
+in the order 1 2 3 4 5 is a deeply frustrating thing to debug. Therefore,
+when writing DB-tests, "Nuke'em from orbit" is the only proper way to handle
+cleanup.
 </p>
 
 <div>
- <a href =""></a>
+ <a href ="04-hundred-percent-coverage.html">100% coverage</a>
  <a href ="index.html">Start</a>
- <a href =""></a>
 </div>
 </body>
 </html>

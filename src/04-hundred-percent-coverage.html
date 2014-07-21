@@ -12,6 +12,46 @@
 
 <h1>100% coverage</h1>
 <p>
+If someone tries to push for 100% test coverage,
+I get a knee jerk reaction. Not because it can't be done, but because the
+person requesting it probably does not understand what should be tested
+with unit tests and what are the benefits if unit tests. A 100% test
+coverage for a DTO-class, that is literally nothing else than a bunch
+of fields, getters, and setters, with zero logic, it is just time consuming.
+A test for a complex service, with multiple interaction points, on the
+other hand is clearly an entity that should have 100% test coverage.
+</p>
+
+<p>
+It is also very important to remember, that a 100% test coverage can
+be accomplished in many ways. Analysis packages like
+<a href="http://www.sonarcube.org">Sonarqube</a>
+can use multiple plugins to check that all possible code branches are passed
+when running a test file, but none of these tools can actually tell
+if the tests check for anything sensible. A 100% test coverage sounds nice,
+but if the tests don't fail when a change causes the code to work in a
+non-intended way, they are useless.
+</p>
+
+<p>
+There are also places where I find it simpler to write integration tests to
+ensure the correct behaviour of the program, than to write unit tests.
+For example, writing a unit test to verify the complete pipeline through
+a REST-api to the database and back again usually requires you to
+set up the database in a way that you can start the REST-service on it.
+After that you have to start the REST-service and then you have to execute the possible login-stuff for every test. After that, you might even need to
+execute the tests in a specific order, which goes quite far from
+what the intention of some well known unit testing tools
+<a href="http://junit.sourceforge.net/doc/faq/faq.htm#tests_2">
+actually are.</a>
+</p>
+
+<p>
+I feel that the situation described in the previous example is something
+that should be prevented before the project actually starts. Unit testing
+and integration testing are two very different beasts in my book, and
+while they are both something a large scale project needs, they should be
+used for their specific purposes.
 </p>
 
 <div>

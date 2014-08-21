@@ -13,4 +13,6 @@ code  {font-family: consolas, courier, monospace;
        (for ease of recognition) and contrast to the text */
        color: #000; /* likewise the background-color comment */
        }
-
+.credits p {
+  font-size: 80%;
+}
